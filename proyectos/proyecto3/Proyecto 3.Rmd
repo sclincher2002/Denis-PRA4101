@@ -1,0 +1,144 @@
+---
+title: "Proyecto Unidad III"
+subtitle: "Auditoría automatizada de bases de datos para reportes empresariales"
+author: "Denis Javier Rivera Arbaiza  RA21117"
+output:
+  pdf_document: 
+    default
+  html_document: 
+    default
+---
+
+# Proyecto Unidad IV
+
+## Leyendo datos de archivos.
+
+Leer datos de archivos consiste en importar información almacenada en archivos externos (como CSV, TXT o Excel) hacia R para poder analizarla, modificarla y visualizarla.
+
+Permite trabajar con datos reales sin tener que escribirlos manualmente en R. Por ejemplo: Analizar encuestas. Procesar bases de datos. Realizar estudios estadísticos. Limpiar y transformar datos.
+
+
+
+---
+
+# Archivos CSV
+
+CSV (Comma-Separated Values) es un formato de archivo de texto utilizado para almacenar datos en forma de tabla.
+Cada fila representa un registro, Cada columna representa una variable.
+Los datos suelen estar separados por comas (,), por puntos y coma (;).
+
+**Por comas (,)**
+
+Para importar datos serparados por comas se utiliza.
+read.csv("archivo.csv")
+
+ejemplo de este tipos de datos: 
+Nombre,Edad,Ciudad,Profesión
+Ana López,28,San Salvador,Ingeniera
+Luis Martínez,34,Santa Ana,Contador
+María Ruiz,22,Sonsonate,Estudiante
+
+**Por puntos y coma (;)**
+
+Para importar datos serparados por putos y comas se utiliza.
+read.csv2("archivo.csv")
+
+ejemplo de este tipos de datos:
+Nombre;Edad;Ciudad;Profesión
+Ana López;28;San Salvador;Ingeniera
+Luis Martínez;34;Santa Ana;Contador
+María Ruiz;22;Sonsonate;Estudiante
+
+
+
+```{r}
+
+
+# Separado por comas
+datos1 <- read.csv("datos_comas.csv")
+datos1
+
+# Separado por punto y coma
+datos2 <- read.csv2("datos_puntoycoma.csv")
+datos2
+
+```
+
+# Archivos TXT
+
+Es un formato de archivo de texto plano, que contiene solo caracteres legibles sin formato especial (sin negrita, colores, imágenes ni diseños complejos).
+
+**Características principales:**
+Ligero y compatible con casi todos los sistemas, programas y lenguajes (incluido R).
+Se puede abrir con el Bloc de notas, TextEdit, editores de código, etc.
+Los datos suelen organizarse en filas y columnas separadas por espacios, tabulaciones, comas o puntos y coma.
+
+
+**uso en R:** Ideal para importar conjuntos de datos sencillos, ya que su estructura simple facilita su lectura y procesamiento.
+
+**Archivo TXT que contiene una base de datos**
+
+Para importar una base de datos se utiliza. read.delim(("archivo.csv")
+Para importar un txt que contiene un codigo compatible en RStudio se utiliza source("archivo.csv")
+
+ejemplo de un base de datos en TXT.
+Nombre	Edad	Ciudad
+Ana	28	San Salvador
+Luis	34	Santa Ana
+
+# Archivos .xls y .xlsx
+
+Ambos son formatos de archivos de Microsoft Excel, utilizados para almacenar hojas de cálculo.
+
+**.xls**
+Es el formato antiguo de Excel (usado principalmente hasta Excel 2003).
+Tiene un límite menor de filas y columnas.
+Utiliza un formato binario.
+
+**.xlsx**
+Es el formato moderno de Excel (desde Excel 2007).
+Permite muchas más filas y columnas.
+Está basado en XML comprimido, por lo que suele ocupar menos espacio.
+Es el formato más utilizado actualmente.
+
+Para importar datos de un archivo .xls y .xlsx se utiliza. read_excel("archivo.xlsx")
+
+```{r}
+
+
+library(readxl)
+
+datos3 <- read_excel("dato_excel.xlsx")
+datos3
+```
+# Archivos .db y .sqlite
+
+Ambas son extensiones de archivos de base de datos.
+
+**.db**: Es una extensión genérica que significa database (base de datos). Se usa para archivos que almacenan información estructurada.
+
+Para importar datos de un archivo .db  se utiliza.  
+
+**DBI::dbReadTable(DBI::dbConnect(RSQLite::SQLite(), "tu_archivo.db"), "nombre_de_la_tabla")**
+
+**sqlite** : Indica explícitamente que el archivo es una base de datos creada con SQLite, un motor muy ligero, autónomo y que no necesita un servidor separado.
+
+Para importar datos de un archivo .sqlite  se utiliza.
+
+**DBI::dbReadTable(DBI::dbConnect(RSQLite::SQLite(), "tu_archivo.db"), "nombre_de_la_tabla")**
+
+# Archivos propios de RStudio
+
+**.R** → Script de R. Para importar se utiliza **source("script.R")**
+
+**.RData** → Guarda varios objetos de R. Para importar se utiliza  **load("datos.RData")**
+
+**.rds** → Guarda un único objeto de R. Para importar se utiliza  **datos <- readRDS("datos.rds")**
+
+**.Rmd** → Documento R Markdown. Para importar se utiliza **file.edit("informe.Rmd")**
+
+**.Rhistory** → Historial de comandos ejecutados. Para importar se utiliza **loadhistory("mi_historial.Rhistory")**
+
+
+
+
